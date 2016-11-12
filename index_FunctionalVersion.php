@@ -11,7 +11,7 @@ session_start();
 	<body>
 		<h1>Welcome</h1>
 		
-		<form action="indeed_v3.php" method="POST">
+		<form action="index_FunctionalVersion.php" method="POST">
 			<fieldset>
 				<legend>Search for a job</legend>
 				Job : <input type="text" name="job" id="job"><br>
