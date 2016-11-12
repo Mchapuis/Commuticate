@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Communitcate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.1/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.1/"></script>
+    <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "dojo/domReady!"
+    ], function(Map, MapView){
+      var map = new Map({
+        basemap: "streets"
+      });
+      var view = new MapView({
+        container: "viewDiv",  // Reference to the scene div created in step 5
+        map: map,  // Reference to the map object created before the scene
+        zoom: 4,  // Sets the zoom level based on level of detail (LOD)
+        center: [15, 65]  // Sets the center point of view in lon/lat
+      });
+    });
+    </script>
+</head>
+  </head>
+  <body>
+
+<div class="row rowMap viewDiv" id="viewDiv">
+
+</div>
+
+<div class="row paraDiv">
+  <form>
+     Your Home<br>
+    <input type="text" name="firstname"><br>
+     Occupational Field<br>
+    <input type="text" name="lastname">
+  </form>
+</div>
+
+ <!-- js libraries -->
+
+
+  <!-- arcgis -->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/foundation/6.2.4/foundation.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.util.mediaQuery.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.drilldown.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.dropdownMenu.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.util.keyboard.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.util.motion.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.util.nest.js"></script>
+<script>
+   $(document).ready(function() {
+      $(document).foundation();
+   })
+</script>
+
+  </body>
+</html>
