@@ -36,6 +36,7 @@ session_start();
 		<form class="rowOptions row removeMarginPadding removeMaxWidth"action="index_v1.php" method="POST">
 <div class="column medium-4">
 	<h1>Welcome</h1>
+	<p>Visualizing your job search on Indeed.com with Arcgis API</p>
 </div>
 <div class="column medium-4">
 			<fieldset>
@@ -66,12 +67,6 @@ session_start();
 			</div>
 
 			<div class="row rowInfo">
-			  <form>
-			     Your Home<br>
-			    <input class="input" type="text" name="firstname"><br>
-			     Occupational Field<br>
-			    <input  class="input"type="text" name="lastname">
-			  </form>
 			</div>
 	</body>
 </html>
@@ -108,7 +103,6 @@ session_start();
 //if search button is clicked
 //echo "before";
 if (isset($_REQUEST['search'])) {
-
     //check to see if the search button was hit
     //echo "the search button has been hit";
 
@@ -117,6 +111,8 @@ if (isset($_REQUEST['search'])) {
     $loc = $_POST['location'];
     $r = $_POST['radius'];
     $jt = $_POST['jobtype'];
+
+		printf("ca function");
 
     //set the limit of jobs per page
     $limit = 25;
@@ -155,8 +151,8 @@ if (isset($_REQUEST['search'])) {
 
 		$lim;
 
-foreach ($xml as $result) {
-    $lim = $person->count();
+foreach ($xml as $results) {
+    $lim = $results->count();
 }
 
 printf($lim);
