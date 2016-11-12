@@ -415,12 +415,24 @@ border-color: transparent transparent transparent #3b88db;
 }
                       /****************************************************commuticate*****************************************************/
 
-.viewDiv{
+.rowOptions{
   width:100vw;
-  height:75vh;
+  height:20vh;
 }
 
-.paraDiv{
+.rowMap{
   width:100vw;
-  height:25vh;
+  height:60vh;
+  max-width: none !important;
+}
+
+.rowInfo{
+  width:100vw;
+  height:20vh;
+}
+
+.input{
+  width:100px;
+  height: 25px;
+  display: inline;
 }

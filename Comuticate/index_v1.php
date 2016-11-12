@@ -32,25 +32,31 @@ session_start();
 		<!--end For the map- aregis-->
 	</head>
 	<body>
-		<h1>Welcome</h1>
 
-		<form action="index_v1.php" method="POST">
+		<form class="rowOptions row removeMarginPadding removeMaxWidth"action="index_v1.php" method="POST">
+<div class="column medium-4">
+	<h1>Welcome</h1>
+</div>
+<div class="column medium-4">
 			<fieldset>
 				<legend>Search for a job</legend>
-				Job : <input type="text" name="job" id="job"><br>
-				location : <input type="text" name="location"><br>
-				radius : <input type="number" name="radius" min="0"><br>
+				Job : <input class="input"  type="text" name="job" id="job">
+				location : <input  class="input" type="text" name="location"><br>
+				radius : <input class="input"  type="number" name="radius" min="0">
+				</div>
 				JOB TYPE
-				<select name="jobtype">
+				<div class="column medium-4">
+				<select class="input" name="jobtype">
 					<!--full time is defautl-->
-					<option selected value ="fulltime">Full Time</option>
-					<option value="partime">Part Time</option>
-					<option value="contract">Contract</option>
-					<option value="internship">Internship</option>
-					<option value="temporary">Temporary</option>
+						<option selected value ="fulltime">Full Time</option>
+						<option value="partime">Part Time</option>
+						<option value="contract">Contract</option>
+						<option value="internship">Internship</option>
+						<option value="temporary">Temporary</option>
 				</select><br>
 			</fieldset>
 			<input type="submit" name="search" value="submit">
+			</div>
 			</form>
 			<!-- MAP Argis-->
 
@@ -59,12 +65,12 @@ session_start();
 
 			</div>
 
-			<div class="row paraDiv">
+			<div class="row rowInfo">
 			  <form>
 			     Your Home<br>
-			    <input type="text" name="firstname"><br>
+			    <input class="input" type="text" name="firstname"><br>
 			     Occupational Field<br>
-			    <input type="text" name="lastname">
+			    <input  class="input"type="text" name="lastname">
 			  </form>
 			</div>
 	</body>
@@ -101,66 +107,73 @@ session_start();
 //ini_set("display_errors","On");
 //if search button is clicked
 //echo "before";
-if(isset($_REQUEST['search'])){
+if (isset($_REQUEST['search'])) {
 
-	//check to see if the search button was hit
-	//echo "the search button has been hit";
+    //check to see if the search button was hit
+    //echo "the search button has been hit";
 
-	//holds all of the HTML post Request
-	$job = $_POST['job'];
-	$loc = $_POST['location'];
-	$r = $_POST['radius'];
-	$jt = $_POST['jobtype'];
+    //holds all of the HTML post Request
+    $job = $_POST['job'];
+    $loc = $_POST['location'];
+    $r = $_POST['radius'];
+    $jt = $_POST['jobtype'];
 
-	//set the limit of jobs per page
-	$limit = 25;
-	//used to go throught all of the jobs and keep track of position in list of jobs
-	$start = 0;
-	$total = 0;
-	//made finish equal amount because api only allowed max 25..so loop 25
-	$finish = $limit;
+    //set the limit of jobs per page
+    $limit = 25;
+    //used to go throught all of the jobs and keep track of position in list of jobs
+    $start = 0;
+    $total = 0;
+    //made finish equal amount because api only allowed max 25..so loop 25
+    $finish = $limit;
 
-	//hold all the information I need for later in the program
-	$hold = array("job" => $job, "location" => $loc, "radius" => $r, "jobtype" => $jt, "startloop" => $start, "totalresults" => $total,"finishloop" => $finish);
+    //hold all the information I need for later in the program
+    $hold = array('job' => $job, 'location' => $loc, 'radius' => $r, 'jobtype' => $jt, 'startloop' => $start, 'totalresults' => $total, 'finishloop' => $finish);
 
-	//had to create session to cave info so I can research when user hits next page
-	$_SESSION["hold"] = $hold;
+    //had to create session to cave info so I can research when user hits next page
+    $_SESSION['hold'] = $hold;
 
-	//took information from session so I can use to start job search
-	$q = $_SESSION["hold"]["job"];
-	$l = $_SESSION["hold"]["location"];
-	$r = $_SESSION["hold"]["radius"];
-	$jt = $_SESSION["hold"]["jobtype"];
-	$start = $_SESSION["hold"]["startloop"];
-	$total = $_SESSION["hold"]["totalresults"];
-	$finish = $_SESSION["hold"]["finishloop"];
+    //took information from session so I can use to start job search
+    $q = $_SESSION['hold']['job'];
+    $l = $_SESSION['hold']['location'];
+    $r = $_SESSION['hold']['radius'];
+    $jt = $_SESSION['hold']['jobtype'];
+    $start = $_SESSION['hold']['startloop'];
+    $total = $_SESSION['hold']['totalresults'];
+    $finish = $_SESSION['hold']['finishloop'];
 
-	//trying to change this with inputs
-	$html = "";
-	//$url = "http://api.indeed.com/ads/apisearch?publisher=919878668572272&q=java&l=austin%2C+tx&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
+    //trying to change this with inputs
+    $html = '';
+    //$url = "http://api.indeed.com/ads/apisearch?publisher=919878668572272&q=java&l=austin%2C+tx&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
 
-	$url = "http://api.indeed.com/ads/apisearch?publisher=919878668572272&q=$q&l=$l&radius=$r&st=&jt=$jt&start=&limit=$limit&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
-	$xml = simplexml_load_file($url);
+    $url = "http://api.indeed.com/ads/apisearch?publisher=919878668572272&q=$q&l=$l&radius=$r&st=&jt=$jt&start=&limit=$limit&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
+    $xml = simplexml_load_file($url);
 
+    //this works as a default
+    //$html = "";
+    //$url = "http://api.indeed.com/ads/apisearch?publisher=919878668572272&q=java&l=austin%2C+tx&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
+    //$xml = simplexml_load_file($url);
 
-	//this works as a default
-	//$html = "";
-	//$url = "http://api.indeed.com/ads/apisearch?publisher=919878668572272&q=java&l=austin%2C+tx&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
-	//$xml = simplexml_load_file($url);
+		$lim;
 
-	for($i=0; $i < 5;$i++){
-		$title = $xml->results->result[$i]->jobtitle;
-		$company = $xml->results->result[$i]->company;
-		$latitude = $xml->results->result[$i]->latitude;
-		$longitude = $xml->results->result[$i]->longitude;
-		$snippet = $xml->results->result[$i]->snippet;
+foreach ($xml as $result) {
+    $lim = $person->count();
+}
 
-		$html .= "<p>title: $title <br> latitude: $latitude, longitude: $longitude</p> <br> <p>Company: $company</p> <br> <p> Description: $snippet</p>";
-	}
+printf($lim);
 
-	//Print all the result together
-	//need to separate each call to it's proper position
-	echo $html;
+    for ($i = 0; $i < $lim; ++$i) {
+        $title = $xml->results->result[$i]->jobtitle;
+        $company = $xml->results->result[$i]->company;
+        $latitude = $xml->results->result[$i]->latitude;
+        $longitude = $xml->results->result[$i]->longitude;
+        $snippet = $xml->results->result[$i]->snippet;
+
+        $html .= "<p>title: $title <br> latitude: $latitude, longitude: $longitude</p> <br> <p>Company: $company</p> <br> <p> Description: $snippet</p>";
+    }
+
+    //Print all the result together
+    //need to separate each call to it's proper position
+    echo $html;
 }
 
 ?>
