@@ -1,5 +1,5 @@
-# Commuticate
-Yhack 2016 - web application using ArcGis api to locate job postings from indeed  
+# COMUTICATE
+Yhack 2016 - web service using ArcGis API to locate job postings from Indeed.com
 
 Open the file on a server to run it  
 
