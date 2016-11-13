@@ -12,6 +12,7 @@ To see what queries are imported:
 3- Open the first Object, under Results you will see an array of Objects containing information about the query.  
 4- example of the log for a search of Austin and waiter. We would use the latitude and longitude numbers to add markers to the map.  
 
+EXAMPLE OF OUTPUT IN THE CONSOLE.LOG 
 Object  
 dupefilter  
 :  
