@@ -11,24 +11,6 @@ session_start();
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.css">
 		<link rel="stylesheet" href="./style/style.css">
 		<link rel="stylesheet" href="https://js.arcgis.com/4.1/esri/css/main.css">
-		<script src="https://js.arcgis.com/4.1/"></script>
-		<script>
-		require([
-			"esri/Map",
-			"esri/views/MapView",
-			"dojo/domReady!"
-		], function(Map, MapView){
-			var map = new Map({
-			basemap: "streets"
-		});
-		var view = new MapView({
-			container: "viewDiv",  // Reference to the scene div created in step 5
-			map: map,  // Reference to the map object created before the scene
-			zoom: 4,  // Sets the zoom level based on level of detail (LOD)
-			center: [15, 65]  // Sets the center point of view in lon/lat
-			});
-		});
-		</script>
 		<!--end For the map- aregis-->
 	</head>
 	<body>
@@ -56,7 +38,7 @@ session_start();
 						<option value="temporary">Temporary</option>
 				</select><br>
 			</fieldset>
-			<input type="submit" name="search" value="submit">
+			<input type="submit" name="search" value="submit" id="submitButton">
 			</div>
 			</form>
 			<!-- MAP Argis-->
@@ -68,6 +50,38 @@ session_start();
 
 			<div class="row rowInfo">
 			</div>
+			<!-- <script>
+			view.goto([0,0]);
+			</script> -->
+
+			<script src="https://js.arcgis.com/4.1/"></script>
+			<script>
+			require([
+				"esri/Map",
+				"esri/views/MapView",
+				"dojo/on",
+				"dojo/domReady!"
+			], function(Map, MapView, on){
+				var map = new Map({
+				basemap: "streets"
+			});
+			var view = new MapView({
+				container: "viewDiv",  // Reference to the scene div created in step 5
+				map: map,  // Reference to the map object created before the scene
+				zoom: 4,  // Sets the zoom level based on level of detail (LOD)
+				center: [15, 65]  // Sets the center point of view in lon/lat
+				});
+
+				on(submitButton, "click", function(){
+					console.log("In recenter");
+
+				view.goTo([0,0]);
+});
+
+			});
+
+
+			</script>
 	</body>
 </html>
 <!-- END OF DISPLAY FOR INPUT OF USER -->
@@ -88,7 +102,7 @@ session_start();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.dropdownMenu.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.util.keyboard.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.util.motion.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.util.nest.js"></script>
+<script src="https://cdnjs {}.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.util.nest.js"></script>
 <script>
    $(document).ready(function() {
       $(document).foundation();
@@ -112,7 +126,7 @@ if (isset($_REQUEST['search'])) {
     $r = $_POST['radius'];
     $jt = $_POST['jobtype'];
 
-		printf("ca function");
+    printf('ca function');
 
     //set the limit of jobs per page
     $limit = 25;
@@ -149,13 +163,13 @@ if (isset($_REQUEST['search'])) {
     //$url = "http://api.indeed.com/ads/apisearch?publisher=919878668572272&q=java&l=austin%2C+tx&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
     //$xml = simplexml_load_file($url);
 
-		$lim;
+        $lim;
 
-foreach ($xml as $results) {
-    $lim = $results->count();
-}
+    foreach ($xml as $results) {
+        $lim = $results->count();
+    }
 
-printf($lim);
+    printf($lim);
 
     for ($i = 0; $i < $lim; ++$i) {
         $title = $xml->results->result[$i]->jobtitle;
