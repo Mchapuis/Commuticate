@@ -65,7 +65,7 @@ session_start();
 				"esri/geometry/Point",
 				"esri/symbols/SimpleMarkerSymbol",
 				"dojo/domReady!"
-			], function(Map, MapView, Point, on){
+			], function(Map, MapView, on){
 				var map = new Map({
 				basemap: "streets"
 			});
@@ -88,17 +88,16 @@ session_start();
 						 console.log(responseJSON);
 						 console.log("results is "+responseJSON.results);
 						 if (typeof responseJSON.results[0] !== 'undefined') {
-							 posY = Math.round(responseJSON.results[0].longitude * 10 ) /10;
+							 posY = Math.round(responseJSON.results[0].longitude * 10 )/10 ;
 							 posX = Math.round(responseJSON.results[0].latitude * 10 )/10 ;
 							 console.log(posY+"booo");
 							 console.log(posX+"booo");
 						 	}
 					 }
 				 }).done(function(){
-					 	event.preventDefault();
 					 console.log(posY+" woooo");
 					 console.log(posX+" woooo");
-					 view.goTo([posY,posX]);
+					 view.goTo([posY, posX]);
 				 });
 });
 
