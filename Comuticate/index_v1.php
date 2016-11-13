@@ -62,19 +62,43 @@ session_start();
 				"esri/Map",
 				"esri/views/MapView",
 				"dojo/on",
+				"esri/Graphic",
 				"esri/geometry/Point",
+				"esri/geometry/Multipoint",
 				"esri/symbols/SimpleMarkerSymbol",
+				"esri/symbols/PictureMarkerSymbol",
 				"dojo/domReady!"
-			], function(Map, MapView, on){
+			], function(Map, MapView, on,Graphic,Point,Multipoint,SimpleMarkerSymbol,PictureMarkerSymbol){
 				var map = new Map({
 				basemap: "streets"
 			});
 			var view = new MapView({
 				container: "viewDiv",  // Reference to the scene div created in step 5
 				map: map,  // Reference to the map object created before the scene
-				zoom: 4,  // Sets the zoom level based on level of detail (LOD)
+				zoom: 3,  // Sets the zoom level based on level of detail (LOD)
 				center: [15, 65]  // Sets the center point of view in lon/lat
 				});
+
+				// var symbol = new PictureMarkerSymbol({
+				//   url: "https://webapps-cdn.esri.com/Apps/MegaMenu/img/logo.jpg",
+				//    width: "8px",
+				//    height: "8px"
+				//  });
+
+				var symbol = new SimpleMarkerSymbol({
+				  style: "square",
+				  color: "blue",
+				  size: "8px",  // pixels
+				  outline: {  // autocasts as esri/symbols/SimpleLineSymbol
+				    color: [ 255, 255, 0 ],
+				    width: 3  // points
+				  }
+				});
+
+				 var multipoint = new Multipoint({
+					});
+
+					var pointGraphic;
 
 				on(submitButton, "click", function(event){
 					console.log("In recenter");
@@ -83,8 +107,8 @@ session_start();
 					 data: $('#ourForm').serialize(),
 					 method: 'post',
 					 success: function(data){
-						 done = false;
 						 responseJSON = JSON.parse(data);
+						 rescnt = responseJSON.results.length;
 						 console.log(responseJSON);
 						 console.log("results is "+responseJSON.results);
 						 if (typeof responseJSON.results[0] !== 'undefined') {
@@ -92,14 +116,34 @@ session_start();
 							 posX = Math.round(responseJSON.results[0].latitude * 10 )/10 ;
 							 console.log(posY+"booo");
 							 console.log(posX+"booo");
+
+
+							 for(i =0; i<rescnt; i++){
+								  multipoint.addPoint(new Point({
+								 	 longitude: Math.round(responseJSON.results[i].longitude * 10 )/10,
+								 	 latitude: Math.round(responseJSON.results[i].latitude * 10 )/10
+								 }));
+							 }
+							 console.log(multipoint);
+							 pointGraphic = new Graphic({
+								 geometry: multipoint,
+								 symbol: symbol
+								 });
 						 	}
 					 }
 				 }).done(function(){
 					 console.log(posY+" woooo");
 					 console.log(posX+" woooo");
-					 view.goTo([posY, posX]);
+					 view.graphics.add(pointGraphic);
+					 view.goTo({
+  				 center: [posY, posX],
+  			 		zoom: 10
+			 			});
+					console.log(pointGraphic);
+					//  view.goTo([posY, posX]);
+					//  view.zoom(10);
 				 });
-});
+			 });
 
 			});
 
