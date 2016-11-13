@@ -15,7 +15,7 @@ session_start();
 	</head>
 	<body>
 
-		<form class="rowOptions row removeMarginPadding removeMaxWidth"action="index_v1.php" method="POST">
+		<form id="ourForm" class="rowOptions row removeMarginPadding removeMaxWidth"action="index_v1.php" method="POST">
 <div class="column medium-4">
 	<h1>Welcome</h1>
 	<p>Visualizing your job search on Indeed.com with Arcgis API</p>
@@ -56,13 +56,16 @@ session_start();
 
 			var posX = 0;
 			var posY  =0;
+			var responseJSON = null;
 
 			require([
 				"esri/Map",
 				"esri/views/MapView",
 				"dojo/on",
+				"esri/geometry/Point",
+				"esri/symbols/SimpleMarkerSymbol",
 				"dojo/domReady!"
-			], function(Map, MapView, on){
+			], function(Map, MapView, Point, on){
 				var map = new Map({
 				basemap: "streets"
 			});
@@ -74,15 +77,28 @@ session_start();
 				});
 
 				on(submitButton, "click", function(event){
-					event.preventDefault()
 					console.log("In recenter");
-
-				 view.goTo([posX,posY]);
+					event.preventDefault();
 				 $.ajax('http://localhost/commuticate/Commuticate/Comuticate/dunno.php',{
+					 data: $('#ourForm').serialize(),
 					 method: 'post',
 					 success: function(data){
-						 console.log(data);
+						 done = false;
+						 responseJSON = JSON.parse(data);
+						 console.log(responseJSON);
+						 console.log("results is "+responseJSON.results);
+						 if (typeof responseJSON.results[0] !== 'undefined') {
+							 posY = Math.round(responseJSON.results[0].longitude * 10 ) /10;
+							 posX = Math.round(responseJSON.results[0].latitude * 10 )/10 ;
+							 console.log(posY+"booo");
+							 console.log(posX+"booo");
+						 	}
 					 }
+				 }).done(function(){
+					 	event.preventDefault();
+					 console.log(posY+" woooo");
+					 console.log(posX+" woooo");
+					 view.goTo([posY,posX]);
 				 });
 });
 
