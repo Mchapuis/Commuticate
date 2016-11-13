@@ -4,6 +4,10 @@ mustard = #E9B000;
 blush = #EB6E80;
 aqua = #008F95;*/
 
+body{
+	font-family: Helvetica;
+}
+
 .radius50{
   border-radius: 50px;
   border-width:1px;
@@ -11,8 +15,17 @@ aqua = #008F95;*/
   background-color: #E9B000;
   color: white;
 }
+.myField{
+	margin-left: 10%;
+}
 
+.myInput{
+	width: 25%;
+}
 
+.title{
+	margin: auto;
+}
 
 .postRequestForms{
   width: 80% !important;
@@ -88,7 +101,8 @@ aqua = #008F95;*/
 }
 form{
   width:100%;
-  height:100%
+  height:100%;
+  height:100%;
 }
 
 .submitButton{
