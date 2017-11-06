@@ -1,4 +1,4 @@
-# COMUTICATE
+# Job Search
 Yhack 2016 - web service using GoogleMap API to locate job postings from Indeed.com
 
 
