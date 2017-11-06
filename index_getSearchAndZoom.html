@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Place Autocomplete Hotel Search</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+	
+<!-- temporary css style for this feature-->
+<style>
+html, body {
+height: 100%;
+margin: 0;
+padding: 0;
+}
+
+#map {
+height: 100%;
+width:100%
+}
+</style>
+	
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHTRx7tANW8qTjbVrDe5RKeY0EPg2LEEQ&libraries=places&callback=initMap"
+async defer></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://gdc.indeed.com/ads/apiresults.js"></script>
+                                    
+<script src="processingInput.js"></script>
+</head>
+
+<body>
+<form id="ourForm" action="callToIndeed.php" method="POST">
+<!-- nav -->
+<div id="nav">
+<div type="text" id= "job">
+	<input id="jobInput"name="jobInput" placeholder="Enter a job" type="text"></input>
+</div>
+	<!-- job type -->
+	<div>
+	job type : 
+	<select name="jobtype">
+		<!--full time is defautl-->
+		<option selected value ="fulltime">Full Time</option>
+		<option value="partime">Part Time</option>
+		<option value="contract">Contract</option>
+		<option value="internship">Internship</option>
+		<option value="temporary">Temporary</option>
+	</select>
+	</div>
+	<!-- end job type-->
+</div>
+<!-- end nav-->
+<div id="location" >
+<input id="autocomplete" name="autocomplete" placeholder="Enter a city" type="text" />
+</div>
+
+<!-- submit -->
+<div>
+<input type="submit" name="search" value="submit" id="submitForm">
+</div>
+<!-- end submit-->
+</form>
+<div id="map"></div>
+<div id="listing"></div>
+
+
+</body>
+</html>

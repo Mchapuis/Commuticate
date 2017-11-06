@@ -1,9 +1,10 @@
 # COMUTICATE
-Yhack 2016 - web service using ArcGis API to locate job postings from Indeed.com
+Yhack 2016 - web service using GoogleMap API to locate job postings from Indeed.com
 
-Open the file on a server to run it  
 
-#IMPORTANT  
+## The recent update is not working yet, the version in the "old" folder is but using ArgGis API
+
+#### IMPORTANT  
 The file doesn't display all the searches from indeed.  
 To see what queries are imported:  
 
@@ -12,89 +13,3 @@ To see what queries are imported:
 3- Open the first Object, under Results you will see an array of Objects containing information about the query.  
 4- example of the log for a search of Austin and waiter. We would use the latitude and longitude numbers to add markers to the map.  
 
-EXAMPLE OF OUTPUT IN THE CONSOLE.LOG 
-Object  
-dupefilter  
-:  
-true  
-end  
-:  
-25   
-highlight  
-:  
-true   
-location  
-:  
-"austin"  
-pageNumber  
-:  
-0  
-paginationPayload  
-:  
-""  
-query  
-:  
-"waiter"  
-radius  
-:  
-30  
-results  
-:  
-Array[25]  
-0  
-:  
-Object  
-city  
-:  
-"Austin"  
-company  
-:  
-"Firehouse Subs W. William Cannon"  
-country  
-:  
-"US"  
-date  
-:  
-"Thu, 03 Nov 2016 12:57:02 GMT"  
-expired  
-:  
-false 
-formattedLocation  
-:  
-"Austin, TX"  
-formattedLocationFull  
-:  
-"Austin, TX"  
-formattedRelativeTime  
-:  
-"10 days ago"  
-indeedApply  
-:  
-true  
-jobkey  
-:  
-"752573b455eb6447"  
-jobtitle  
-:  
-"Team Member/Cashier (flexible schedule) South Austin"  
-latitude  
-:  
-30.266483  
-longitude  
-:  
--97.74176  
-onmousedown  
-:  
-"indeed_clk(this,'534');"  
-snippet  
-:  
-"If you are looking for server, wait staff, <b>waiter</b>, or other FOH opportunities please apply for this wonderful opportunity...."  
-source  
-:  
-"Indeed"  
-sponsored  
-:  
-false  
-state  
-:  
-"TX"  
